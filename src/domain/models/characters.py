@@ -8,11 +8,11 @@ class Characters:
         sin: str, 
         description: str,
         image_base64: str,
-        sacred_treasue: str
+        sacred_treasure: str
     ) -> None:
         self.id = id
         self.name = name
         self.sin = sin
         self.description = description
         self.image_base64: image_base64
-        self.sacred_treasure: sacred_treasue
+        self.sacred_treasure: sacred_treasure
