@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS `seven_deadly_sins_database`.`characters` (
     sin VARCHAR(100) NOT NULL,
     sacred_treasure VARCHAR(100),
     description VARCHAR(500) NOT NULL,
-    image_base64 MEDIUMTEXT NOT NULL,
+    image_base64 LONGBLOB NOT NULL,
 
     PRIMARY KEY (id)
 );

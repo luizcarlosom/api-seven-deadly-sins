@@ -13,7 +13,7 @@ class CharacterRepository(CharacterRepositoryInterface):
             name: str, 
             sin: str, 
             description: str, 
-            image_base64: str, 
+            image_base64: bytes, 
             sacred_treasure: Optional[str] = None
         ) -> None:
     
@@ -84,7 +84,7 @@ class CharacterRepository(CharacterRepositoryInterface):
             name: Optional[str] = None, 
             sin: Optional[str] = None, 
             description: Optional[str] = None, 
-            image_base64: Optional[str] = None, 
+            image_base64: Optional[bytes] = None, 
             sacred_treasure: Optional[str] = None
         ) -> None: 
 
