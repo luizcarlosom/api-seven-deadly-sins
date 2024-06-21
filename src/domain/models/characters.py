@@ -7,12 +7,10 @@ class Characters:
         name: str, 
         sin: str, 
         description: str,
-        image_base64: bytes,
         sacred_treasure: str
     ) -> None:
         self.id = id
         self.name = name
         self.sin = sin
         self.description = description
-        self.image_base64: image_base64
         self.sacred_treasure: sacred_treasure

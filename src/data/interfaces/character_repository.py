@@ -12,7 +12,6 @@ class CharacterRepositoryInterface(ABC):
         name: str, 
         sin: str, 
         description: str, 
-        image_base64: bytes, 
         sacred_treasue: Optional[str] = None
     ) -> None: pass
 
@@ -32,6 +31,5 @@ class CharacterRepositoryInterface(ABC):
         name: Optional[str] = None, 
         sin: Optional[str] = None, 
         description: Optional[str] = None, 
-        image_base64: Optional[bytes] = None, 
         sacred_treasue: Optional[str] = None
     ) -> None: pass

@@ -10,6 +10,5 @@ class CharacterCreate(ABC):
         name: str,
         sin: str,
         description: str,
-        image_base64: bytes,
         sacred_treasure: Optional[str] = None
     ) -> Dict: pass

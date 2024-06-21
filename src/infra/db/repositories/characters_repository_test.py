@@ -11,7 +11,6 @@ def test_insert_character():
     mocked_name = 'Meliodas'
     mocked_sin = 'Ira'
     mocked_description = 'Lider dos 7 pecados capitais'
-    mocked_image_base64 = '@asdsnj345ugfman'
     mocked_sacred_treasure = 'Espada Sagrada'
 
     characters_repository = CharacterRepository()
@@ -19,7 +18,6 @@ def test_insert_character():
         mocked_name,
         mocked_sin,
         mocked_description,
-        mocked_image_base64,
         mocked_sacred_treasure
     )
 
@@ -28,13 +26,11 @@ def test_insert_character():
         WHERE name = '{}'
         AND sin = '{}'
         AND description = '{}'
-        AND image_base64 = '{}'
         AND sacred_treasure = '{}'
     '''.format(
         mocked_name,
         mocked_sin,
         mocked_description,
-        mocked_image_base64,
         mocked_sacred_treasure
     )
     
@@ -44,7 +40,6 @@ def test_insert_character():
     assert registry.name == mocked_name
     assert registry.sin == mocked_sin
     assert registry.description == mocked_description
-    assert registry.image_base64 == mocked_image_base64
     assert registry.sacred_treasure == mocked_sacred_treasure
 
     connection.execute(text(f'''
@@ -57,7 +52,6 @@ def test_delete_character():
     mocked_name = 'Meliodas'
     mocked_sin = 'Ira'
     mocked_description = 'Lider dos 7 pecados capitais'
-    mocked_image_base64 = '@asdsnj345ugfman'
     mocked_sacred_treasure = 'Espada Sagrada'
 
     characters_repository = CharacterRepository()
@@ -65,7 +59,6 @@ def test_delete_character():
         mocked_name,
         mocked_sin,
         mocked_description,
-        mocked_image_base64,
         mocked_sacred_treasure
     )
 
@@ -74,13 +67,11 @@ def test_delete_character():
         WHERE name = '{}'
         AND sin = '{}'
         AND description = '{}'
-        AND image_base64 = '{}'
         AND sacred_treasure = '{}'
     '''.format(
         mocked_name,
         mocked_sin,
         mocked_description,
-        mocked_image_base64,
         mocked_sacred_treasure
     )
 
@@ -90,7 +81,6 @@ def test_delete_character():
     assert registry.name == mocked_name
     assert registry.sin == mocked_sin
     assert registry.description == mocked_description
-    assert registry.image_base64 == mocked_image_base64
     assert registry.sacred_treasure == mocked_sacred_treasure
 
     characters_repository.delete_character(registry.id)
@@ -108,7 +98,6 @@ def test_select_character():
     mocked_name = 'Meliodas'
     mocked_sin = 'Ira'
     mocked_description = 'Lider dos 7 pecados capitais'
-    mocked_image_base64 = '@asdsnj345ugfman'
     mocked_sacred_treasure = 'Espada Sagrada'
 
     characters_repository = CharacterRepository()
@@ -116,7 +105,6 @@ def test_select_character():
         mocked_name,
         mocked_sin,
         mocked_description,
-        mocked_image_base64,
         mocked_sacred_treasure
     )
 
@@ -125,13 +113,11 @@ def test_select_character():
         WHERE name = '{}'
         AND sin = '{}'
         AND description = '{}'
-        AND image_base64 = '{}'
         AND sacred_treasure = '{}'
     '''.format(
         mocked_name,
         mocked_sin,
         mocked_description,
-        mocked_image_base64,
         mocked_sacred_treasure
     )
 
@@ -141,7 +127,6 @@ def test_select_character():
     assert registry.name == mocked_name
     assert registry.sin == mocked_sin
     assert registry.description == mocked_description
-    assert registry.image_base64 == mocked_image_base64
     assert registry.sacred_treasure == mocked_sacred_treasure
 
     selected_character = characters_repository.select_character(registry.id)
@@ -150,7 +135,6 @@ def test_select_character():
     assert selected_character.name == mocked_name
     assert selected_character.sin == mocked_sin
     assert selected_character.description == mocked_description
-    assert selected_character.image_base64 == mocked_image_base64
     assert selected_character.sacred_treasure == mocked_sacred_treasure
 
     characters_repository.delete_character(registry.id)
@@ -163,14 +147,12 @@ def test_select_all_characters():
             'name': 'Meliodas',
             'sin': 'Ira',
             'description': 'Lider dos 7 pecados capitais',
-            'image_base64': '@asdsnj345ugfman',
             'sacred_treasure': 'Espada Sagrada'
         },
         {
             'name': 'Ban',
             'sin': 'Ganância',
             'description': 'Imortal',
-            'image_base64': '@asdsnj345ugfman2',
             'sacred_treasure': 'Couro de Raposa'
         }
     ]
@@ -182,7 +164,6 @@ def test_select_all_characters():
             character['name'],
             character['sin'],
             character['description'],
-            character['image_base64'],
             character['sacred_treasure']
         )
 
@@ -196,7 +177,6 @@ def test_select_all_characters():
             if (db_character.name == character['name'] and
                 db_character.sin == character['sin'] and
                 db_character.description == character['description'] and
-                db_character.image_base64 == character['image_base64'] and
                 db_character.sacred_treasure == character['sacred_treasure']):
                 found = True
                 break
@@ -211,7 +191,6 @@ def test_update_character():
     mocked_name = 'Meliodas'
     mocked_sin = 'Ira'
     mocked_description = 'Lider dos 7 pecados capitais'
-    mocked_image_base64 = '@asdsnj345ugfman'
     mocked_sacred_treasure = 'Espada Sagrada'
 
     characters_repository = CharacterRepository()
@@ -219,7 +198,6 @@ def test_update_character():
         mocked_name,
         mocked_sin,
         mocked_description,
-        mocked_image_base64,
         mocked_sacred_treasure
     )
 
@@ -228,13 +206,11 @@ def test_update_character():
         WHERE name = '{}'
         AND sin = '{}'
         AND description = '{}'
-        AND image_base64 = '{}'
         AND sacred_treasure = '{}'
     '''.format(
         mocked_name,
         mocked_sin,
         mocked_description,
-        mocked_image_base64,
         mocked_sacred_treasure
     )
 
@@ -244,14 +220,12 @@ def test_update_character():
     assert registry.name == mocked_name
     assert registry.sin == mocked_sin
     assert registry.description == mocked_description
-    assert registry.image_base64 == mocked_image_base64
     assert registry.sacred_treasure == mocked_sacred_treasure
 
 
     updated_name = 'Meliodas Updated'
     updated_sin = 'Ira Updated'
     updated_description = 'Lider dos 7 pecados capitais Updated'
-    updated_image_base64 = '@updatedbase64'
     updated_sacred_treasure = 'Nova Espada Sagrada'
 
     characters_repository.update_character(
@@ -259,7 +233,6 @@ def test_update_character():
         name=updated_name,
         sin=updated_sin,
         description=updated_description,
-        image_base64=updated_image_base64,
         sacred_treasure=updated_sacred_treasure
     )
     
@@ -268,7 +241,6 @@ def test_update_character():
     assert updated_registry.name == updated_name
     assert updated_registry.sin == updated_sin
     assert updated_registry.description == updated_description
-    assert updated_registry.image_base64 == updated_image_base64
     assert updated_registry.sacred_treasure == updated_sacred_treasure
 
     connection.execute(text(f'''

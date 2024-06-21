@@ -11,6 +11,5 @@ class CharacterUpdate(ABC):
         name: Optional[str] = None, 
         sin: Optional[str] = None, 
         description: Optional[str] = None, 
-        image_base64: Optional[bytes] = None, 
         sacred_treasure: Optional[str] = None
     ) -> Dict: pass

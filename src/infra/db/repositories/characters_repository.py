@@ -13,7 +13,6 @@ class CharacterRepository(CharacterRepositoryInterface):
             name: str, 
             sin: str, 
             description: str, 
-            image_base64: bytes, 
             sacred_treasure: Optional[str] = None
         ) -> None:
     
@@ -23,7 +22,6 @@ class CharacterRepository(CharacterRepositoryInterface):
                     name=name,
                     sin=sin,
                     description=description,
-                    image_base64=image_base64,
                     sacred_treasure=sacred_treasure
                 )
                 database.session.add(new_registry)
@@ -84,7 +82,6 @@ class CharacterRepository(CharacterRepositoryInterface):
             name: Optional[str] = None, 
             sin: Optional[str] = None, 
             description: Optional[str] = None, 
-            image_base64: Optional[bytes] = None, 
             sacred_treasure: Optional[str] = None
         ) -> None: 
 
@@ -104,8 +101,6 @@ class CharacterRepository(CharacterRepositoryInterface):
                         character.sin = sin
                     if description is not None:
                         character.description = description
-                    if image_base64 is not None:
-                        character.image_base64 = image_base64
                     if sacred_treasure is not None:
                         character.sacred_treasure = sacred_treasure
 

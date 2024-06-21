@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, LargeBinary
+from sqlalchemy import Column, String, Integer
 from src.infra.db.settings.base import Base
 
 class Characters(Base):
@@ -9,7 +9,6 @@ class Characters(Base):
     sin = Column(String, nullable=False)
     sacred_treasure = Column(String, nullable=True)
     description = Column(String, nullable=False)
-    image_base64 = Column(LargeBinary, nullable=False)
 
     def __repr__(self):
         return f"Characters [id={self.id}, first_name={self.name}]"
