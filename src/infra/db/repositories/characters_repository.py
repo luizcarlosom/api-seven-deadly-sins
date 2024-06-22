@@ -83,7 +83,7 @@ class CharacterRepository(CharacterRepositoryInterface):
             sin: Optional[str] = None, 
             description: Optional[str] = None, 
             sacred_treasure: Optional[str] = None
-        ) -> None: 
+        ) -> Characters: 
 
         with DBConnectionHandler() as database:
             try:
@@ -105,6 +105,7 @@ class CharacterRepository(CharacterRepositoryInterface):
                         character.sacred_treasure = sacred_treasure
 
                     database.session.commit()
+                return character
             except Exception as exception:
                 database.session.rollback()
                 raise exception
