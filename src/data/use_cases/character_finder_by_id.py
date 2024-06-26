@@ -17,7 +17,7 @@ class CharacterFinderById(CharacterFinderByIdInterface):
 
     def __search_character(self, id: int) -> Characters:
         character = self.__character_repository.select_character(id)
-        if len(character) == 0: raise Exception('Invalid ID')
+        if character is None: raise Exception('Invalid ID')
         return character
 
     @classmethod
