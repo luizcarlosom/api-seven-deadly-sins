@@ -31,7 +31,7 @@ class CharacterRepository(CharacterRepositoryInterface):
                 raise exception
     
     @classmethod
-    def delete_character(cls, id: str) -> None: 
+    def delete_character(cls, id: int) -> None: 
         with DBConnectionHandler() as database:
             try:
                 character = (
@@ -47,7 +47,7 @@ class CharacterRepository(CharacterRepositoryInterface):
                 raise exception
             
     @classmethod
-    def select_character(cls, id: str) -> Characters: 
+    def select_character(cls, id: int) -> Characters: 
         with DBConnectionHandler() as database:
             try:
                 character = (
@@ -78,7 +78,7 @@ class CharacterRepository(CharacterRepositoryInterface):
     @classmethod
     def update_character(
             cls, 
-            id: str, 
+            id: int, 
             name: Optional[str] = None, 
             sin: Optional[str] = None, 
             description: Optional[str] = None, 

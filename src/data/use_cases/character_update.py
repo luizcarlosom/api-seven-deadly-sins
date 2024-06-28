@@ -4,7 +4,7 @@ from src.domain.use_cases.character_update import CharacterUpdate  as CharacterU
 from src.data.interfaces.character_repository import CharacterRepositoryInterface
 from src.domain.models.characters import Characters
 
-class CharacterFinderById(CharacterUpdateInterface):
+class CharacterUpdate(CharacterUpdateInterface):
     def __init__(self, character_repository: CharacterRepositoryInterface) -> None:
         self.__character_repository = character_repository
 
@@ -29,7 +29,7 @@ class CharacterFinderById(CharacterUpdateInterface):
 
     def __validate_id(self, id: int):
         character = self.__character_repository.select_character(id)
-        if len(character) == 0: raise Exception('Invalid ID')
+        if character is None: raise Exception('Invalid ID')
         
     def __update_character(
             self, 

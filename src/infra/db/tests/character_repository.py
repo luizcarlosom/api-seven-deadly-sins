@@ -1,4 +1,5 @@
-#pylint: disable=redefined-builtin
+#pylint: disable=redefined-builtin, too-many-arguments
+
 from typing import Optional, List
 from src.domain.models.characters import Characters
 
@@ -42,3 +43,27 @@ class CharacterRepositorySpy:
 
     def select_character(self, id: int) -> Optional[Characters]:
         return next((c for c in self.characters if c.id == id), None )
+
+    def update_character(
+        self,
+        id: int,
+        name: Optional[str] = None, 
+        sin: Optional[str] = None, 
+        description: Optional[str] = None, 
+        sacred_treasure: Optional[str] = None
+    ) -> Characters:
+
+        character = next((c for c in self.characters if c.id == id), None)
+
+        if character:
+            if name is not None:
+                character.name = name
+            if sin is not None:
+                character.sin = sin
+            if description is not None:
+                character.description = description
+            if sacred_treasure is not None:
+                character.sacred_treasure = sacred_treasure
+
+        return character
+        
