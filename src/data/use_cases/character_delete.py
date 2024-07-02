@@ -8,21 +8,21 @@ class CharacterDelete(CharacterDeleteInterface):
         self.__character_repository = character_repository
 
     def delete(self, id: int) -> Dict: 
-        self.__validate_id(id)
-        character = self.__delete_character(id)
+        character = self.__validate_id(id)
+        self.__delete_character(id)
         response = self.__format_response(f"The {character.name} character has been deleted")
         return response
        
 
     def __delete_character(self, id: int) -> None:
-        character = self.__character_repository.delete_character(id)
-        if character:
-            return character
-        raise Exception(f"Character with id {id} does not exist.")
+        success = self.__character_repository.delete_character(id)
+        if not success:
+            raise Exception(f"Character with id {id} does not exist.")
 
-    def __validate_id(self, id: int) -> None:
+    def __validate_id(self, id: int) -> Dict:
         character = self.__character_repository.select_character(id)
         if character is None: raise Exception('Invalid ID')
+        return character
 
     @classmethod
     def __format_response(cls, message: str) -> Dict: 

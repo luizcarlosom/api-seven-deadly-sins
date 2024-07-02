@@ -12,12 +12,12 @@ class CharacterDeleteController(ControllerInterface):
         self.__use_case = use_case
 
     def handle(self, http_request: Optional[HttpRequest]=None) -> HttpResponse:
-        id = http_request.query_params["id"]
+        id = http_request.path_params["id"]
         
         response = self.__use_case.delete(id)
     
         return HttpResponse(
-            status_code=204,
+            status_code=200,
             body={ "data": response }
         )
     

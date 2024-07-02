@@ -6,7 +6,7 @@ from src.presentation.http_types.http_response import HttpResponse
 
 class HttpRequestMock():
     def __init__(self) -> None:
-        self.query_params = { "id": 1 }
+        self.path_params = { "id": 1 }
 
 def test_handle():
     http_request_mock = HttpRequestMock()

@@ -54,11 +54,11 @@ class CharacterUpdate(CharacterUpdateInterface):
             "type": "Characters",
             "count": 1,
             "attributtes": { 
-                    "id": character.id, 
-                    "name": character.name, 
-                    "sin": character.sin, 
-                    "description": character.description, 
-                    "sacred_treasure": character.sacred_treasure 
+                    "id": character["id"], 
+                    "name": character["name"], 
+                    "sin": character["sin"], 
+                    "description": character["description"], 
+                    "sacred_treasure": character["sacred_treasure"] 
             }
         }
         return response

@@ -14,7 +14,7 @@ class CharacterFinderByIdController(ControllerInterface):
         self.__use_case = use_case
 
     def handle(self, http_request: Optional[HttpRequest]=None) -> HttpResponse:
-        id = http_request.query_params['id']
+        id = http_request.path_params["id"]
 
         response = self.__use_case.find_character_by_id(id)
 

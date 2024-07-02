@@ -1,5 +1,5 @@
 # pylint: disable=too-many-arguments, redefined-builtin
-from typing import List, Optional
+from typing import List, Optional, Dict
 from src.data.interfaces.character_repository import CharacterRepositoryInterface
 from src.infra.db.settings.connection import DBConnectionHandler
 from src.infra.db.entities.characters import Characters as CharactersEntity
@@ -31,7 +31,7 @@ class CharacterRepository(CharacterRepositoryInterface):
                 raise exception
     
     @classmethod
-    def delete_character(cls, id: int) -> None: 
+    def delete_character(cls, id: int) -> bool: 
         with DBConnectionHandler() as database:
             try:
                 character = (
@@ -41,7 +41,7 @@ class CharacterRepository(CharacterRepositoryInterface):
                         .delete()
                 )
                 database.session.commit()
-                return character
+                return character > 0
             except Exception as exception:
                 database.session.rollback()
                 raise exception
@@ -83,7 +83,7 @@ class CharacterRepository(CharacterRepositoryInterface):
             sin: Optional[str] = None, 
             description: Optional[str] = None, 
             sacred_treasure: Optional[str] = None
-        ) -> Characters: 
+        ) -> Dict: 
 
         with DBConnectionHandler() as database:
             try:
@@ -105,7 +105,17 @@ class CharacterRepository(CharacterRepositoryInterface):
                         character.sacred_treasure = sacred_treasure
 
                     database.session.commit()
-                return character
+
+                    database.session.refresh(character)
+
+                    return {
+                        "id": character.id,
+                        "name": character.name,
+                        "sin": character.sin,
+                        "description": character.description,
+                        "sacred_treasure": character.sacred_treasure
+                    }
+                return None
             except Exception as exception:
                 database.session.rollback()
                 raise exception
