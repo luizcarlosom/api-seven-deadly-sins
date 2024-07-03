@@ -5,6 +5,7 @@ from src.domain.use_cases.character_finder_by_id import (
 )
 from src.data.interfaces.character_repository import CharacterRepositoryInterface
 from src.domain.models.characters import Characters
+from src.errors.types import HttpNotFoundError
 
 class CharacterFinderById(CharacterFinderByIdInterface):
     def __init__(self, character_repository: CharacterRepositoryInterface) -> None:
@@ -17,7 +18,7 @@ class CharacterFinderById(CharacterFinderByIdInterface):
 
     def __search_character(self, id: int) -> Characters:
         character = self.__character_repository.select_character(id)
-        if character is None: raise Exception('Invalid ID')
+        if character is None: raise HttpNotFoundError('Invalid ID')
         return character
 
     @classmethod

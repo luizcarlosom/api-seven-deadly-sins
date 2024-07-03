@@ -2,6 +2,7 @@
 from typing import Optional, Dict
 from src.domain.use_cases.character_create import CharacterCreate as CharacterCreateInterface
 from src.data.interfaces.character_repository import CharacterRepositoryInterface
+from src.errors.types import HttpBadRequestError
 
 class CharacterCreate(CharacterCreateInterface):
     def __init__(self, character_repository: CharacterRepositoryInterface) -> None:
@@ -25,15 +26,14 @@ class CharacterCreate(CharacterCreateInterface):
 
     @classmethod
     def __validate_field(cls, name_field: str, content_field: Optional[str]) -> None:
-        if name_field != 'sacred_treasure' and not content_field:
-            raise Exception(f'The {name_field} field cannot be empty')
-
         if content_field is not None and not isinstance(content_field, str):
-            raise Exception(f'The {name_field} field is invalid for character creation')    
+            raise HttpBadRequestError(f'The {name_field} field is invalid for character creation')    
 
         if content_field is not None and len(content_field) > 36:
             if name_field != 'description':
-                raise Exception(f'The {name_field} field has more characters than it should')
+                raise HttpBadRequestError(
+                    f'The {name_field} field has more characters than it should'
+                )
 
     def __registry_character_information(
         self,

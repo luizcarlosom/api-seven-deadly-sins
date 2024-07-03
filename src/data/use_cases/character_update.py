@@ -3,6 +3,7 @@ from typing import Dict, Optional
 from src.domain.use_cases.character_update import CharacterUpdate  as CharacterUpdateInterface
 from src.data.interfaces.character_repository import CharacterRepositoryInterface
 from src.domain.models.characters import Characters
+from src.errors.types import HttpBadRequestError
 
 class CharacterUpdate(CharacterUpdateInterface):
     def __init__(self, character_repository: CharacterRepositoryInterface) -> None:
@@ -10,7 +11,7 @@ class CharacterUpdate(CharacterUpdateInterface):
 
     def update(
         self, 
-        id: str, 
+        id: int, 
         name: Optional[str] = None, 
         sin: Optional[str] = None, 
         description: Optional[str] = None, 
@@ -29,7 +30,7 @@ class CharacterUpdate(CharacterUpdateInterface):
 
     def __validate_id(self, id: int):
         character = self.__character_repository.select_character(id)
-        if character is None: raise Exception('Invalid ID')
+        if character is None: raise HttpBadRequestError('Invalid ID')
         
     def __update_character(
             self, 
@@ -49,7 +50,7 @@ class CharacterUpdate(CharacterUpdateInterface):
         return character
 
     @classmethod
-    def __format_response(cls, character: Characters) -> Dict:
+    def __format_response(cls, character: Dict) -> Dict:
         response = {
             "type": "Characters",
             "count": 1,

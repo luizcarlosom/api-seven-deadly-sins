@@ -1,6 +1,6 @@
 #pylint: disable=too-many-arguments, redefined-builtin
 
-from typing import List, Optional
+from typing import List, Optional, Dict
 from abc import ABC, abstractmethod
 from src.domain.models.characters import Characters
 
@@ -32,4 +32,4 @@ class CharacterRepositoryInterface(ABC):
         sin: Optional[str] = None, 
         description: Optional[str] = None, 
         sacred_treasue: Optional[str] = None
-    ) -> None: pass
+    ) -> Dict: pass

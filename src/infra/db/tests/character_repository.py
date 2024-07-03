@@ -1,6 +1,6 @@
 #pylint: disable=redefined-builtin, too-many-arguments
 
-from typing import Optional, List
+from typing import Optional, List, Dict
 from src.domain.models.characters import Characters
 
 class CharacterRepositorySpy:
@@ -51,7 +51,7 @@ class CharacterRepositorySpy:
         sin: Optional[str] = None, 
         description: Optional[str] = None, 
         sacred_treasure: Optional[str] = None
-    ) -> Characters:
+    ) -> Dict:
 
         character = next((c for c in self.characters if c.id == id), None)
 
@@ -65,5 +65,12 @@ class CharacterRepositorySpy:
             if sacred_treasure is not None:
                 character.sacred_treasure = sacred_treasure
 
-        return character
+
+        return {
+            "id": character.id,
+            "name": character.name,
+            "sin": character.sin,
+            "description": character.description,
+            "sacred_treasure": character.sacred_treasure
+        }
         

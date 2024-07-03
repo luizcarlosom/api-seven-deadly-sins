@@ -2,6 +2,7 @@
 from typing import Dict
 from src.domain.use_cases.character_delete import CharacterDelete as CharacterDeleteInterface
 from src.data.interfaces.character_repository import CharacterRepositoryInterface
+from src.errors.types import HttpBadRequestError
 
 class CharacterDelete(CharacterDeleteInterface):
     def __init__(self, character_repository: CharacterRepositoryInterface) -> None:
@@ -17,11 +18,11 @@ class CharacterDelete(CharacterDeleteInterface):
     def __delete_character(self, id: int) -> None:
         success = self.__character_repository.delete_character(id)
         if not success:
-            raise Exception(f"Character with id {id} does not exist.")
+            raise HttpBadRequestError("Failed when trying to delete the character.")
 
     def __validate_id(self, id: int) -> Dict:
         character = self.__character_repository.select_character(id)
-        if character is None: raise Exception('Invalid ID')
+        if character is None: raise HttpBadRequestError(f'Character with id {id} does not exist.')
         return character
 
     @classmethod
