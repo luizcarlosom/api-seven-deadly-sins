@@ -21,6 +21,7 @@
 - Pylint
 - SQLAlchemy
 - Pre-commit
+- Cerberus
 
 ## Run the API
 
