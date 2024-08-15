@@ -51,7 +51,3 @@ Run Application
 
 ## Tests
 *To run all the tests of the application, execute `"pytest"` in the terminal*
-
-## Structure
-
-## Tools Used
